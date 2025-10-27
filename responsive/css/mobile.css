@@ -1,0 +1,26 @@
+
+.hero__section {
+    padding: 40px 20px !important;
+    text-align: center;
+}
+.hero__caption {
+    letter-spacing: -1px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--light-gray);
+}
+
+.hero__content h1 {
+    padding-top: 0.4rem;
+    padding-bottom: 0.5rem;
+    font-size: 3rem;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.hero__content h1 i {
+    text-transform: lowercase;
+    color: var(--light-gray);
+}

@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+:root {
+  --bg-color: #4e4e4e;
+  --modal-color: #1a1a18;
+  --text-color: #e3e2e0;
+  --gray-color: #5e5d59;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+
+input {
+  outline: none;
+  border: none;
+  display: inline-flex;
+  width: 100%;
+  background-color: transparent;
+}
+
+svg {
+  stroke: var(--gray-color);
+  height: 16px;
+  width: 16px;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+html,
+body {
+  /* background-color: var(--bg-color); */
+  font-family: "IBM Plex Sans", sans-serif;
+  transition: all 0.3s ease;
+  background: red;
+}
+
+/* When modal is open */
+body.modal-active {
+  background: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: backdrop-filter 0.3s ease, background 0.3s ease;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background-color: var(--modal-color);
+  box-shadow: 0 5px 2px var(--modal-color);
+  z-index: 1000;
+  backdrop-filter: blur(18px) saturate(180%);
+}
+
+.modal__content {
+  .modal__header {
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-color);
+    .modal__header--search {
+      padding-inline: 15px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      .modal__header--search-field {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        div:last-child {
+          flex-grow: 1;
+          > input {
+            width: 100%;
+            outline: none;
+            padding: 6px;
+            flex-grow: 1;
+            border: none;
+            color: var(--gray-color);
+            font-size: 14px;
+            width: 100%;
+          }
+        }
+      }
+
+      > div:last-child {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        span {
+          display: flex;
+          align-items: center;
+        }
+        > span:last-child {
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          background-color: var(--bg-color);
+          padding: 2px 4px;
+          border-radius: 5px;
+          > span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-color);
+          }
+        }
+      }
+    }
+  }
+  .modal__body--content {
+    padding-inline: 15px;
+    .modal__quick--actions,
+    p.modal__p {
+      color: var(--gray-color);
+      padding: 10px 0;
+      font-size: 14px;
+    }
+    .modal__body--recent-search {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      div {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--bg-color);
+        span {
+          display: flex;
+          align-items: center;
+          gap: 0.55rem;
+        }
+
+        &:not(:last-child) {
+          > span:nth-child(2) {
+            padding-left: 5px;
+          }
+        }
+
+        svg {
+          stroke: var(--text-color);
+          margin-inline: 2px;
+        }
+        span:last-child {
+          svg {
+            stroke: var(--gray-color);
+          }
+        }
+      }
+    }
+
+    .modal__last--search {
+      padding: 30px 0 20px 0;
+      color: var(--gray-color);
+      font-size: 15px;
+      font-weight: 500;
+      span {
+        color: var(--text-color);
+      }
+    }
+
+    .modal__body--recent-search-people {
+      display: flex;
+      flex-direction: column;
+      /* gap: 0.55rem; */
+      .person__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &.active {
+          background-color: #292929;
+        }
+        &:hover {
+          background-color: #292929;
+        }
+      }
+      .person__row--profile {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        p {
+          font-weight: 500;
+          font-size: 15px;
+          &:last-child {
+            color: var(--gray-color);
+          }
+        }
+
+        img {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .person__row--actions {
+        display: inline-flex;
+        align-content: center;
+        > span {
+          padding-inline: 5px;
+          display: inline-flex;
+          align-content: center;
+          span {
+            color: var(--gray-color);
+            padding-inline: 5px;
+          }
+          svg {
+            height: 20px;
+            width: 20px;
+          }
+          &.menu__dotted {
+            position: relative;
+            .menu__dotted--dot {
+              position: absolute;
+              top: 10px;
+              right: -2px;
+              /* height: 10px;
+              width: 10px; */
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              > svg {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                stroke: var(--text-color);
+                fill: var(--text-color);
+                transform: perspective(400px) rotateY(15deg);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .modal__quick--actions {
+      padding-top: 30px;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .action__row {
+      padding: 5px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .action__row--item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        div:not(:last-child) {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          span {
+            font-weight: 500;
+            font-size: 14px;
+          }
+          span.action__icon {
+            padding: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-color);
+            border-radius: 5px;
+            svg {
+              stroke: var(--text-color);
+              stroke-width: 3px;
+            }
+          }
+        }
+        > div:last-child {
+              width: 10px;
+              height: 10px;
+              background-color: var(--gray-color0);
+          }
+      }
+    }
+  }
+}

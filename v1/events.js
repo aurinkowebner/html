@@ -35,6 +35,9 @@ fm.addEventListener("click", loadFn)
  *  > mouseenter
  *  > mouseup
  *  > mousedown
+ *  > contextmenu
+ * 
+ * 
  * 
  * * keyboard events
  *  > keyup
@@ -44,7 +47,7 @@ fm.addEventListener("click", loadFn)
  * * Form Events
  *  > submit
  *  > change
- *  > focus
+ *  > focus (focusin | focusout)
  *  > blur
  *
  * * Touch Event
@@ -141,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //     pDiv.innerHTML = JSON.stringify(data)
     // }
 
+    // const z = 0;
 
     btn.addEventListener("dblclick", function (event) {
         event.target.textContent = "Clicked Btn";
@@ -155,55 +159,178 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    track.addEventListener("mouseover", function (event) {
-        console.log(event.clientY)
-        console.log(event.clientX)
+    // track.addEventListener("mouseover", function (event) {
+    //     console.log(event.clientY)
+    //     console.log(event.clientX)
 
-        document.getElementById("logC").innerHTML = `
-        <h3>Mouse Over</h3>
-        Y-axis: ${event.clientY}
-        <br />
-        X-axis: ${event.clientX}
-        `
-    })
+    //     document.getElementById("logC").innerHTML = `
+    //     <h3>Mouse Over</h3>
+    //     Y-axis: ${event.clientY}
+    //     <br />
+    //     X-axis: ${event.clientX}
+    //     `
+    // })
 
     function color(z, y, x) {
         return `rgb(${z}, ${y}, ${x})`
     }
 
-    track.addEventListener("mousemove", function (event) {
-        const y = event.clientY
-        const x = event.clientX
+    // track.addEventListener("mousemove", function (event) {
+    //     const y = event.clientY
+    //     const x = event.clientX
 
-        event.target.style.backgroundColor = color(0, y, x)
+    //     event.target.style.backgroundColor = color(0, y, x)
 
-        logC.innerHTML = `
-        <h3>Mouse Move</h3>
-        Y-axis: ${y}
-        <br />
-        X-axis: ${x}
-        <br />
-        Z-axis: ${z}
-        `
+    //     logC.innerHTML = `
+    //     <h3>Mouse Move</h3>
+    //     Y-axis: ${y}
+    //     <br />
+    //     X-axis: ${x}
+    //     <br />
+    //     `
+    // })
+
+
+
+    // track.addEventListener("mouseenter", function (event) {
+    //     // console.log(event)
+    //     const y = event.clientY
+    //     const x = event.clientX
+
+    //     event.target.style.backgroundColor = color(0, y, x)
+
+    //     logC.innerHTML = `
+    //     <h3>Mouse Move</h3>
+    //     Y-axis: ${y}
+    //     <br />
+    //     X-axis: ${x}
+    //     <br />
+    //     `
+    // })
+
+
+    const input = document.querySelector("input[name=hello]");
+
+    const values = ["a", "e", "i", "o", "u"]
+
+    const pass = ["pass1", "pass2", "pass3"]
+
+    const inputStatus = document.querySelector("small#input-status");
+
+    // const inputSpan = inputStatus.querySelector("span")
+
+    input.addEventListener("keyup", function (event) {
+        // console.log("Key up event", event.key);
+
+
+
+        // if (values.includes(event.key)) {
+        //     event.target.style.border = "2px solid green";
+        //     event.target.style.outline = "2px solid green";
+        // } else {
+        //     event.target.style.border = "2px solid red";
+        //     event.target.style.outline = "2px solid red";
+        // }
+
+        // if (pass.includes(event.target.value)) {
+        //     event.target.style.border = "2px solid green";
+        //     event.target.style.outline = "2px solid green";
+
+        //     inputStatus.setAttribute("class", "success")
+        //     // inputStatus.textContent = "Your input status is valid"
+        //     inputStatus.querySelector("span.valid").style.display = "block"
+        //     inputStatus.querySelector("span.invalid").style.display = "none"
+
+        // } else {
+        //     event.target.style.border = "2px solid red";
+        //     event.target.style.outline = "2px solid red";
+
+        //     inputStatus.setAttribute("class", "error")
+        //     // inputStatus.textContent = "Your input status is invalid"
+        //     inputStatus.querySelector("span.invalid").style.display = "block"
+        //     inputStatus.querySelector("span.valid").style.display = "none"
+
+
+        // }
+
+        // console.log(event.target.value)
+    })
+
+    // input.addEventListener("keydown", function (event) {
+    //     console.log("Key down event", event.key);
+    // })
+
+    // input.addEventListener("keypress", function (event) {
+    //     console.log("Key press event", event.key);
+    // })
+    // document.addEventListener("contextmenu", function (event) {
+    //     console.log(event)
+    // })
+
+
+    const fm = document.querySelector("form.loginForm");
+
+    const username = fm.querySelector("input[name=username]");
+    const password = fm.querySelector("input[name=password]");
+
+    // option1
+    username.addEventListener("focusin", function (event) {
     })
 
 
 
+    function validatePassword(event) {
+        if (!event.target.value) return;
+        if (!(event.target.value.length >= 8)) return;
+        return true
+    }
 
-    track.addEventListener("mouseenter", function (event) {
-        const y = event.clientY
-        const x = event.clientX
 
-        event.target.style.backgroundColor = color(0, y, x)
+    function validate(event, isValid = true) {
+        if (!event.target.value || !isValid) {
+            event.target.setAttribute("class", "invalid");
+        }
+        else {
+            if (event.target.hasAttribute("class") && event.target.classList.contains("invalid")) {
+                event.target.classList.remove("invalid")
+            }
 
-        logC.innerHTML = `
-        <h3>Mouse Move</h3>
-        Y-axis: ${y}
-        <br />
-        X-axis: ${x}
-        <br />
-        Z-axis: ${z}
-        `
+        }
+    }
+
+
+
+    function focusHandle(event, fieldName = "username") {
+        validate(event)
+        if (fieldName) {
+            if (!validatePassword(event)) {
+                validate(event, false)
+            }
+        }
+
+        if (fieldName && (fieldName === "username")) {
+
+        }
+
+    }
+
+
+    username.addEventListener("focusout", function (event) {
+        focusHandle(event, "username")
+    })
+    password.addEventListener("focusout", function (event) {
+        focusHandle(event, "password")
+    })
+
+    fm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        // console.log("clicked with default behavior")
+        console.log("clicked without default behavior")
+        console.log(event.target.value)
+
+        const fd = new FormData(event.target)
+
+        console.log(Object.fromEntries(fd))
     })
 
 })

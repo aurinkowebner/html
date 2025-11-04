@@ -8,9 +8,11 @@
     <!-- <script src="./events.js" defer></script> -->
 
     <style>
-      #form {
-        height: 900px;
-      }
+      /*
+    #form {
+      height: 900vh
+    }
+    */
 
       .mouse-over {
         padding: 10px;
@@ -33,6 +35,88 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+      input {
+        padding: 10px;
+        margin-top: 1rem;
+      }
+
+      /*
+      #input-status {
+        margin-top: 0.5rem;
+        &.success {
+          color: green;
+        }
+        &.error {
+          color: red;
+        }
+      }
+      */
+
+      #input-status {
+        margin-top: 0.5rem;
+      }
+
+      #input-status span {
+        display: none;
+      }
+
+      #input-status.success span.valid {
+        color: green;
+      }
+      #input-status.error span.invalid {
+        color: red;
+      }
+
+      /* Nested css */
+      form {
+        width: 80%;
+        margin: 0 auto;
+        /*overflow: hidden*/
+        padding: 10px 10px;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.3);
+
+        margin-bottom: 2rem;
+
+        h3 {
+          text-align: center;
+        }
+        div {
+          padding: 5px 0;
+        }
+        button,
+        input {
+          width: 100%;
+        }
+        input {
+          margin: 0 auto;
+          width: 90%;
+          margin-right: 10px;
+          outline: 1px solid #f0f0f0;
+          border: none;
+          &:focus {
+            outline: 1px solid yellow;
+          }
+          &.invalid {
+            outline: 1px solid red;
+          }
+          &:not(.invalid){
+            outline: 1px solid #f0f0f0;
+          }
+        }
+        button {
+          padding: 10px;
+          margin-top: 1rem;
+          border-radius: 2rem;
+          cursor: pointer;
+          border: none;
+          transition: all 0.3s ease-in-out;
+          font-size: 1.1rem;
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
     </style>
   </head>
   <body>
@@ -42,19 +126,60 @@
     <button type="button">Click Me Btn</button>
     <button type="submit">Click Me Sub</button>
 
-
-    <input type="text" placeholder="value" name="hello">
+    <input type="text" placeholder="value" name="hello" />
+    <br />
+    <small id="input-status">
+      <span class="valid">Your input is valid</span>
+      <span class="invalid">Your input is invalid</span>
+    </small>
 
     <div id="people"></div>
 
     <div class="mouse-over">
       <div id="track"></div>
-    <div id="logC"></div>
+      <div id="logC"></div>
     </div>
 
-
     <div id="form">Click</div>
+
+    <form action=""  class="loginForm">
+      <h3>Login Form</h3>
+      <div>
+        <label for="username">Username:</label>
+        <br />
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="username"
+          required
+          minlength="3"
+          maxlength="20"
+        />
+        <br />
+        <small class="username-status"></small>
+      </div>
+
+      <div>
+        <label for="password">Password:</label>
+        <br />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="password"
+          required
+          minlength="8"
+          autocomplete="additional-name"
+        />
+        <br />
+        <small class="password-status"></small>
+      </div>
+      <div>
+        <button type="submit">Login</button>
+      </div>
+    </form>
     <!-- <script src="./script.js"></script> -->
-     <script src="./events.js"></script>
+    <script src="./events.js"></script>
   </body>
 </html>

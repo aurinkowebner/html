@@ -221,11 +221,13 @@ from hello import greet
 
 
 if __name__ == "__main__":
-    name = greet()
-    if not name:
-        print("Name is required!")
-    else:
-        print(f"Welcome {name}")
+    from seq import sqMain
+    sqMain()
+    # name = greet()
+    # if not name:
+    #     print("Name is required!")
+    # else:
+    #     print(f"Welcome {name}")
 
 
 
